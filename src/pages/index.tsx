@@ -18,7 +18,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     // {
     //   role: "user",
-    //   content: "sendMessagesこんにちは",
+    //   content: "sendMessagesこんにちは\nこんにちは",
     // },
     // {
     //   role: "assistant",
