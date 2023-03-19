@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChatSuccessResponse } from "./api/chat";
 import InputForm from "@/components/InputForm";
 import MessageItem from "@/components/MessageItem";
@@ -47,6 +47,18 @@ export default function Home() {
     },
   });
 
+  const scrollEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollBottom = () => {
+    scrollEndRef?.current?.scrollIntoView();
+  };
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      scrollBottom();
+    }
+  }, [messages]);
+
   return (
     <>
       <Head>
@@ -67,6 +79,7 @@ export default function Home() {
         ) : (
           <div className="p-10 bg-slate-100">入力してください。</div>
         )}
+        <div ref={scrollEndRef}></div>
         <div className="fixed bottom-0 w-full bg-white">
           <InputForm
             onSubmit={(text) => {
