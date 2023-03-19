@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import Head from "next/head";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChatSuccessResponse } from "./api/chat";
 import InputForm from "@/components/InputForm";
 import MessageItem from "@/components/MessageItem";
@@ -43,7 +43,7 @@ export default function Home() {
     },
     onSuccess: (message: Message) => {
       console.log("onSuccess", message);
-      setMessages([...messages, message]);
+      setMessages((messages) => [...messages, message]);
     },
   });
 
@@ -55,7 +55,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
+      <main className="pb-[100px]">
         <h1 className="text-3xl">ChatGTP API sample</h1>
 
         {messages.length > 0 ? (
