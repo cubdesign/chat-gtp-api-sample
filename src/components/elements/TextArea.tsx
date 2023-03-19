@@ -35,6 +35,7 @@ const TextArea: FC<TextAreaProps> = ({
       >
         <textarea
           {...props}
+          value={value}
           ref={textAreaRef}
           className={`
          w-full

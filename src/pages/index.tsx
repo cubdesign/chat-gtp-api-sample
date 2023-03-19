@@ -1,5 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import Head from "next/head";
 import { useState } from "react";
+import { ChatSuccessResponse } from "./api/chat";
 import InputForm from "@/components/InputForm";
 import MessageItem from "@/components/MessageItem";
 
@@ -13,23 +16,36 @@ export type Message = {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "user",
-      content: "こんにちは",
-    },
-    {
-      role: "assistant",
-      content: "こんにちは",
-    },
-    {
-      role: "user",
-      content: "こんにちは 2",
-    },
-    {
-      role: "assistant",
-      content: "こんにちは 3",
-    },
+    // {
+    //   role: "user",
+    //   content: "sendMessagesこんにちは",
+    // },
+    // {
+    //   role: "assistant",
+    //   content: "こんにちは",
+    // },
+    // {
+    //   role: "user",
+    //   content: "こんにちは 2",
+    // },
+    // {
+    //   role: "assistant",
+    //   content: "こんにちは 3",
+    // },
   ]);
+
+  const { mutate } = useMutation({
+    mutationFn: async (messages: Message[]): Promise<Message> => {
+      const res = await axios.post<ChatSuccessResponse>("/api/chat", {
+        messages: messages,
+      });
+      return res.data.message;
+    },
+    onSuccess: (message: Message) => {
+      console.log("onSuccess", message);
+      setMessages([...messages, message]);
+    },
+  });
 
   return (
     <>
@@ -52,7 +68,17 @@ export default function Home() {
           <div className="p-10 bg-slate-100">入力してください。</div>
         )}
         <div className="fixed bottom-0 w-full bg-white">
-          <InputForm />
+          <InputForm
+            onSubmit={(text) => {
+              const newMessages: Message[] = [
+                ...messages,
+                { role: "user", content: text },
+              ];
+              setMessages(newMessages);
+              mutate(newMessages);
+              console.log("onSubmit", text);
+            }}
+          />
         </div>
       </main>
     </>

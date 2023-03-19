@@ -1,12 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, OpenAIApi } from "openai";
+import { Message } from "..";
 
-type SuccessResponse = {
-  answer: string;
+export type ChatSuccessResponse = {
+  message: Message;
 };
 
-type FallbackResponse = {
+export type ChatFallbackResponse = {
   message: string;
 };
 
@@ -17,21 +18,28 @@ const openai = new OpenAIApi(configuration);
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SuccessResponse | FallbackResponse>
+  res: NextApiResponse<ChatSuccessResponse | ChatFallbackResponse>
 ) {
-  let prompt = "";
+  console.log(req.body.messages);
+  let messages = [];
 
-  req.body.prompt && (prompt = req.body.prompt);
+  req.body.messages && (messages = req.body.messages);
 
   try {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo-0301",
-      messages: [{ role: "user", content: prompt }],
+      messages: messages,
     });
 
-    const answer = response.data.choices[0].message?.content;
+    const message = response.data.choices[0].message;
     console.log(response.data);
-    res.status(200).json({ answer: answer! });
+    console.log(message);
+    res.status(200).json({
+      message: {
+        role: "assistant",
+        content: message!.content,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "failed to load data " });
