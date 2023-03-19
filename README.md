@@ -14,3 +14,6 @@ yarn install
 
 [ChatGPT] Open AI API を Node.js x TypeScript で試してみた
 https://dev.classmethod.jp/articles/tried-hello-openai-api-with-nodejs-x-typescript/
+
+Creating a Textarea with dynamic height using React and Typescript
+https://medium.com/@oherterich/creating-a-textarea-with-dynamic-height-using-react-and-typescript-5ed2d78d9848

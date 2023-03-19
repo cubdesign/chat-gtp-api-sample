@@ -1,0 +1,36 @@
+import { FC, useRef } from "react";
+import useAutosizeTextArea from "./useAutosizeTextArea";
+
+export type TextAreaProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
+  containerClassName?: string;
+  inputClassName?: string;
+};
+
+const TextArea: FC<TextAreaProps> = ({
+  containerClassName = "",
+  inputClassName = "",
+  value,
+  ...props
+}) => {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const valueString = value?.toString() ?? ""; 
+  useAutosizeTextArea(textAreaRef.current, valueString);
+
+  return (
+    <div className={`${containerClassName}`}>
+      <textarea
+        {...props}
+        ref={textAreaRef}
+        className={`
+        text-gray-600 shadow border py-2 px-3 w-full rounded
+         focus:outline-none  
+         h-auto
+         ${inputClassName}`}
+      />
+    </div>
+  );
+};
+
+export default TextArea;
+
