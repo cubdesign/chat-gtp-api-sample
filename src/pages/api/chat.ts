@@ -37,7 +37,7 @@ export default async function handler(
     res.status(200).json({
       message: {
         role: "assistant",
-        content: message!.content,
+        content: message!.content!.trim(),
       },
     });
   } catch (error) {
