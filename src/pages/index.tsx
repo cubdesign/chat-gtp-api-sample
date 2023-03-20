@@ -16,22 +16,22 @@ export type Message = {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "user",
-      content: "こんにちは\nこんにちは",
-    },
-    {
-      role: "assistant",
-      content: "こんにちは",
-    },
-    {
-      role: "user",
-      content: "こんにちは 2",
-    },
-    {
-      role: "assistant",
-      content: "こんにちは 3",
-    },
+    // {
+    //   role: "user",
+    //   content: "こんにちは\nこんにちは",
+    // },
+    // {
+    //   role: "assistant",
+    //   content: "こんにちは",
+    // },
+    // {
+    //   role: "user",
+    //   content: "こんにちは 2",
+    // },
+    // {
+    //   role: "assistant",
+    //   content: "こんにちは 3",
+    // },
   ]);
 
   const { mutate, isLoading } = useMutation({
