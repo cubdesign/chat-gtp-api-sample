@@ -16,25 +16,25 @@ export type Message = {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    // {
-    //   role: "user",
-    //   content: "sendMessagesこんにちは\nこんにちは",
-    // },
-    // {
-    //   role: "assistant",
-    //   content: "こんにちは",
-    // },
-    // {
-    //   role: "user",
-    //   content: "こんにちは 2",
-    // },
-    // {
-    //   role: "assistant",
-    //   content: "こんにちは 3",
-    // },
+    {
+      role: "user",
+      content: "こんにちは\nこんにちは",
+    },
+    {
+      role: "assistant",
+      content: "こんにちは",
+    },
+    {
+      role: "user",
+      content: "こんにちは 2",
+    },
+    {
+      role: "assistant",
+      content: "こんにちは 3",
+    },
   ]);
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: async (messages: Message[]): Promise<Message> => {
       const res = await axios.post<ChatSuccessResponse>("/api/chat", {
         messages: messages,
@@ -67,9 +67,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="pb-[100px]">
-        <h1 className="text-3xl">ChatGTP API sample</h1>
 
+      <header className="p-4">
+        <h1 className="text-3xl">ChatGTP API sample</h1>
+      </header>
+
+      <main className="pb-[100px]">
         {messages.length > 0 ? (
           <ul>
             {messages.map((message, index) => (
@@ -77,10 +80,13 @@ export default function Home() {
             ))}
           </ul>
         ) : (
-          <div className="p-10 bg-slate-100">入力してください。</div>
+          <div className="flex justify-center items-center  p-10 min-h-screen bg-slate-200">
+            入力してください。
+          </div>
         )}
+        <div className={`${isLoading ? "block" : "hidden"}`}>...</div>
         <div ref={scrollEndRef}></div>
-        <div className="fixed bottom-0 w-full bg-white">
+        <div className="fixed bottom-0 w-full bg-slate-300">
           <InputForm
             onSubmit={(text) => {
               const newMessages: Message[] = [

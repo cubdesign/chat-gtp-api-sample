@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { BsSend } from "react-icons/bs";
 import TextArea from "@/components/elements/TextArea";
 
 type InputFormProps = {
@@ -34,10 +35,10 @@ const InputForm: FC<InputFormProps> = ({ className = "", onSubmit }) => {
         <TextArea
           value={inputValue}
           onChange={handleChange}
-          containerClassName="w-full"
+          containerClassName="w-full bg-white rounded"
         />
         <button type="submit" className="w-[60px]">
-          送信
+          <BsSend className="mx-auto" />
         </button>
       </form>
     </div>
