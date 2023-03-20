@@ -16,6 +16,10 @@ export type Message = {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "system",
+      content: "あなたは、ドラえもん。私はのび太くんです。",
+    },
     // {
     //   role: "user",
     //   content: "こんにちは\nこんにちは",
