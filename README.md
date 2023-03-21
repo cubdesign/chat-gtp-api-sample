@@ -5,7 +5,7 @@
 ### frontend
 
 ```
-cd front
+cd packages/front
 yarn install
 ```
 
