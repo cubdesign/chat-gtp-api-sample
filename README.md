@@ -22,3 +22,6 @@ https://dev.classmethod.jp/articles/tried-hello-openai-api-with-nodejs-x-typescr
 
 Creating a Textarea with dynamic height using React and Typescript
 https://medium.com/@oherterich/creating-a-textarea-with-dynamic-height-using-react-and-typescript-5ed2d78d9848
+
+Serverless Framework の使い方まとめ
+https://serverless.co.jp/blog/25/
