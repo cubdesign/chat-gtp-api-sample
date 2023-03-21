@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn lint-staged
-
+yarn workspace @chat-gtp-api-sample/front lint-staged

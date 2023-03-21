@@ -2,13 +2,18 @@
 
 ## 開発環境構築
 
+### frontend
+
 ```
+cd front
 yarn install
 ```
 
-### 環境変数の設定
+#### 環境変数の設定
 
-`.env.sample`をコピーして `.env`を作成
+front の`.env.sample`をコピーして `.env`を作成
+
+### backend
 
 ## 参考
 
