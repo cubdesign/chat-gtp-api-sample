@@ -1,5 +1,5 @@
 {
-  "name": "@chat-gtp-api-sample/front",
+  "name": "@chat-gtp-api-sample/back",
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
